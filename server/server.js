@@ -3,30 +3,55 @@ import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
-import blogRouter from "./routes/Blogroutes.js";
+import blogRouter from "./routes/blogRoutes.js";
+import aiRouter from "./routes/aiRoutes.js";
 
 const app = express();
 
 await connectDB();
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:5173",
+  "http://localhost:5174",
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. curl, Postman) or from allowed origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
-// Test route
+// Routes
 app.get("/", (req, res) => {
-  res.send("API is Working");
+  res.json({ success: true, message: "API is Working" });
 });
 
 app.use("/api/admin", adminRouter);
 app.use("/api/blog", blogRouter);
+app.use("/api/ai", aiRouter);
 
-// Port
+// Centralized error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
-// Start server
 app.listen(PORT, () => {
-  console.log("Server is running on port " + PORT);
+  console.log(`Server is running on port ${PORT}`);
 });
 
 export default app;

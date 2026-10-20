@@ -1,5 +1,6 @@
 import multer from "multer";
 
-const upload = multer({ storage: multer.diskStorage({}) });
+// Use memoryStorage so imagekit.files.upload() can read file.buffer
+const upload = multer({ storage: multer.memoryStorage() });
 
 export default upload;
