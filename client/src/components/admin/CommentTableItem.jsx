@@ -1,5 +1,5 @@
 import { assets } from "../../assets/assets/assets";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/app-context";
 
 const CommentTableItem = ({ comment, fetchComments }) => {
   const { axios } = useAppContext();

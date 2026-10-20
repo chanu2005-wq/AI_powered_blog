@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets/assets";
 import Sidebar from "../../components/admin/Sidebar";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/app-context";
 
 const Layout = () => {
   const navigate = useNavigate();

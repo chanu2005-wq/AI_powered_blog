@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { assets } from "../../assets/assets/assets.js";
 import Quill from "quill";
-import { useAppContext } from "../../context/AppContext.jsx";
+import { useAppContext } from "../../context/app-context";
 
 const AddBlog = () => {
   const { axios } = useAppContext();

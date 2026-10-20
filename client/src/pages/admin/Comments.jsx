@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/app-context";
 import CommentTableItem from "../../components/admin/CommentTableItem";
 import { toast } from "react-toastify";
 

@@ -1,12 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { AppContext } from "./app-context.jsx";
 
 const API_BASE_URL =
   import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
 axios.defaults.baseURL = API_BASE_URL;
-
-export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const backendUrl =
@@ -42,6 +41,3 @@ export const AppContextProvider = ({ children }) => {
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAppContext = () => useContext(AppContext);

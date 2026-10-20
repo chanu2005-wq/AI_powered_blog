@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useAppContext } from "./context/AppContext";
+import { useAppContext } from "./context/app-context";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Layout from "./pages/admin/Layout";

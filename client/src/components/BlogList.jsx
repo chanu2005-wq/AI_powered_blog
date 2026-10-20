@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { blog_data, blogCategories } from "../assets/assets/assets";
 import { motion } from "motion/react";
 import BlogCard from "./BlogCard";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/app-context";
 
 const Bloglist = () => {
   const { input, axios } = useAppContext();
@@ -11,27 +11,39 @@ const Bloglist = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchBlogs = useCallback(async () => {
-    try {
-      const { data } = await axios.get("/api/blog/all");
-
-      if (data.success) {
-        setBlogs(data.blogs);
-      } else {
-        setBlogs([]);
-      }
-    } catch (error) {
-      console.error("Failed to fetch blogs:", error);
-      // Fallback to static data if the backend is unavailable
-      setBlogs(blog_data);
-    } finally {
-      setLoading(false);
-    }
-  }, [axios]);
-
   useEffect(() => {
-    fetchBlogs();
-  }, [fetchBlogs]);
+    let cancelled = false;
+
+    const loadBlogs = async () => {
+      try {
+        const { data } = await axios.get("/api/blog/all");
+
+        if (!cancelled) {
+          if (data.success) {
+            setBlogs(data.blogs);
+          } else {
+            setBlogs([]);
+          }
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error("Failed to fetch blogs:", error);
+          // Fallback to static data if the backend is unavailable
+          setBlogs(blog_data);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadBlogs();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [axios]);
 
   const filteredBlogs = blogs.filter((blog) => {
     const searchTerm = (input || "").toLowerCase();

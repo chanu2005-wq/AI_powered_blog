@@ -11,24 +11,69 @@ const app = express();
 await connectDB();
 
 // Middlewares
-const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:5173",
-  "http://localhost:5174",
-  "https://quick-blog-client-zeta.vercel.app",
-];
+// Build allowed origins from environment variable with fallback
+const getAllowedOrigins = () => {
+  const origins = new Set();
+
+  // Add production frontend URL (primary)
+  origins.add("https://quick-blog-client-zeta.vercel.app");
+
+  // Add development origins
+  origins.add("http://localhost:5173");
+  origins.add("http://localhost:5174");
+
+  // Add any additional origins from FRONTEND_URL env var (comma-separated)
+  if (process.env.FRONTEND_URL) {
+    process.env.FRONTEND_URL.split(",").forEach((url) => {
+      const trimmed = url.trim();
+      if (trimmed) origins.add(trimmed);
+    });
+  }
+
+  return Array.from(origins);
+};
+
+const allowedOrigins = getAllowedOrigins();
+
+// Normalize origin for comparison (trim, lowercase, remove trailing slash)
+const normalizeOrigin = (origin) => {
+  if (!origin) return origin;
+  return origin.trim().toLowerCase().replace(/\/$/, "");
+};
+
+const normalizedAllowedOrigins = allowedOrigins.map(normalizeOrigin);
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. curl, Postman) or from allowed origins
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      try {
+        // Allow requests with no origin (e.g. curl, Postman, server-to-server)
+        if (!origin) {
+          return callback(null, true);
+        }
+
+        const normalizedOrigin = normalizeOrigin(origin);
+
+        // Check if origin is allowed
+        if (normalizedAllowedOrigins.includes(normalizedOrigin)) {
+          return callback(null, true);
+        }
+
+        // Origin not allowed - return false to indicate rejection (cors middleware will send 403)
+        return callback(null, false);
+      } catch (error) {
+        // Prevent any unexpected errors from causing 500 on preflight
+        console.error("CORS origin check error:", error);
+        return callback(null, false);
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    maxAge: 86400, // 24 hours
   }),
 );
+
 app.use(express.json());
 
 // Routes
@@ -42,10 +87,12 @@ app.use("/api/ai", aiRouter);
 
 // Centralized error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error("Error:", err.stack || err.message || err);
+  // Don't expose internal error details in production
+  const isDev = process.env.NODE_ENV !== "production";
   res.status(err.status || 500).json({
     success: false,
-    message: err.message || "Internal Server Error",
+    message: isDev ? (err.message || "Internal Server Error") : "Internal Server Error",
   });
 });
 

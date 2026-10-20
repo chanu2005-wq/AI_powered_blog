@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext.jsx";
+import { useAppContext } from "../context/app-context";
 import logo from "../assets/assets/logo.svg";
 
 const Navbar = () => {

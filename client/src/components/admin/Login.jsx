@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/app-context";
 import { toast } from "react-hot-toast";
 
 const Login = () => {

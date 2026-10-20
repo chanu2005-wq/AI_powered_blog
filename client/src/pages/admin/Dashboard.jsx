@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { assets } from "../../assets/assets/assets.js";
 import Blogtableitem from "../../components/admin/BlogTableItem.jsx";
-import { useAppContext } from "../../context/AppContext.jsx";
+import { useAppContext } from "../../context/app-context";
 
 const Dashboard = () => {
   const { axios, token } = useAppContext();
@@ -24,8 +24,29 @@ const Dashboard = () => {
   }, [axios]);
 
   useEffect(() => {
-    if (token) fetchDashboard();
-  }, [token, fetchDashboard]);
+    if (!token) return;
+
+    let cancelled = false;
+
+    const loadDashboard = async () => {
+      try {
+        const { data } = await axios.get("/api/admin/dashboard");
+        if (!cancelled && data.success) {
+          setDashboardData(data.dashboardData);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error("Dashboard fetch error:", error);
+        }
+      }
+    };
+
+    loadDashboard();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [token, axios]);
 
   return (
     <div className="flex-1 p-4 md:p-10 bg-bg">

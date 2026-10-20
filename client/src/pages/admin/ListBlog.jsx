@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/app-context";
 import BlogTableItem from "../../components/admin/BlogTableItem";
 
 const ListBlog = () => {
@@ -21,8 +21,33 @@ const ListBlog = () => {
   }, [axios]);
 
   useEffect(() => {
-    if (token) fetchBlogs();
-  }, [token, fetchBlogs]);
+    if (!token) return;
+
+    let cancelled = false;
+
+    const loadBlogs = async () => {
+      try {
+        const { data } = await axios.get("/api/blog/admin/all");
+        if (!cancelled && data.success) {
+          setBlogs(data.blogs);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error("Fetch blogs error:", error);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadBlogs();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [token, axios]);
 
   return (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-bg">
