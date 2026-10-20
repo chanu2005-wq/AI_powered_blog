@@ -1,24 +1,52 @@
-import { assets } from "../assets/assets/assets.js";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext.jsx";
+import logo from "../assets/assets/logo.svg";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { token, logout } = useAppContext();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
-    <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.logo}
-        alt="logo"
-        className="w-32 sm:w-44 cursor-pointer"
-      />
-      <button
-        onClick={() => navigate("/admin")}
-        className="flex items-center gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5"
-      >
-        Login
-        <img src={assets.arrow} className="w-3" alt="arrow" />
-      </button>
-    </div>
+    <nav className="flex items-center justify-between px-6 py-4 border-b border-border">
+      {/* Logo / Home */}
+      <a href="/" className="inline-block" aria-label="Quick Blog - Home">
+        <img src={logo} alt="Quick Blog" className="h-10 w-auto" />
+      </a>
+
+      {/* Navigation Actions */}
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="text-muted hover:text-primary transition-colors"
+        >
+          Home
+        </button>
+
+        {token ? (
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="px-4 py-2 rounded-md bg-primary text-white hover:bg-hover transition-colors cursor-pointer"
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => navigate("/admin")}
+            className="px-4 py-2 rounded-md bg-primary text-white hover:bg-hover transition-colors cursor-pointer"
+          >
+            Admin Login
+          </button>
+        )}
+      </div>
+    </nav>
   );
 };
 

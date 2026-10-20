@@ -10,7 +10,16 @@
 }
 
 @theme {
-  --color-primary: #1e3a8a;
+  --color-primary: #7C3AED;
+  --color-primary-dark: #4C1D95;
+  --color-lavender: #EDE9FE;
+  --color-lavender-light: #F5F3FF;
+  --color-bg: #FAF9FF;
+  --color-text: #374151;
+  --color-muted: #6B7280;
+  --color-border: #DDD6FE;
+  --color-hover: #6D28D9;
+  --color-purple-soft: #C4B5FD;
 }
 
 .rich-text {
