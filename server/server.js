@@ -14,6 +14,7 @@ await connectDB();
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:5173",
   "http://localhost:5174",
+  "https://quick-blog-client-zeta.vercel.app",
 ];
 app.use(
   cors({
@@ -50,8 +51,11 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Only listen if not in Vercel serverless environment
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 export default app;
