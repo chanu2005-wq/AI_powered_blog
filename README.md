@@ -236,6 +236,9 @@ Browse published content and read individual blog posts through a dedicated read
 ## 📂 Project Structure
 
 ```text
+## 📂 Project Structure
+
+```text
 AI_powered_blog/
 │
 ├── client/
@@ -261,7 +264,11 @@ AI_powered_blog/
 │   ├── server.js
 │   └── package.json
 │
+├── diagram.png
 └── README.md
+```
+
+
 ```
 
 <sub>This is an illustrative structure based on the supplied documentation. Verify directory and filename details against your repository.</sub>
