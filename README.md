@@ -1,16 +1,50 @@
-# React + Vite
+<a id="top"></a>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+<img
+  src="./client/src/assets/quick-blog.svg"
+  alt="QUICK BLOG – animated low-poly title banner"
+  width="100%"
+/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<br/>
 
-## React Compiler
+<img src="https://readme-typing-svg.demolab.com?font=Average+Sans&weight=400&size=22&duration=2600&pause=800&color=A78BFA&center=true&vCenter=true&repeat=true&width=760&height=45&lines=AI-ASSISTED+WRITING%2C+BUILT+IN;PUBLISH+BLOGS+IN+MINUTES;ADMIN+WORKSPACE+%2B+READER+EXPERIENCE;POWERED+BY+THE+MERN+ECOSYSTEM" alt="Animated typing headline" />
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<br/>
 
-## Expanding the ESLint configuration
+**An intelligent blogging platform combining AI-assisted content generation, blog administration, and cloud-based image management.**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<br/>
+
+<a href="https://quick-blog-client-delta-two.vercel.app/">
+  <img src="https://img.shields.io/badge/🚀_EXPLORE_LIVE_DEMO-Visit_Website-F97316?style=for-the-badge" alt="Live Demo"/>
+</a>
+<a href="https://gitdiagram.com/chanu2005-wq/ai_powered_blog">
+  <img src="https://img.shields.io/badge/🏗️_SYSTEM_ARCHITECTURE-View_Diagram-8B5CF6?style=for-the-badge" alt="System Architecture"/>
+</a>
+
+<br/><br/>
+
+<img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React"/>
+<img src="https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite"/>
+<img src="https://img.shields.io/badge/Node.js-Backend-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js"/>
+<img src="https://img.shields.io/badge/Express-REST_API-000000?style=flat-square&logo=express&logoColor=white" alt="Express"/>
+<img src="https://img.shields.io/badge/MongoDB-Database-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB"/>
+<img src="https://img.shields.io/badge/ImageKit-Image_Hosting-EC4899?style=flat-square" alt="ImageKit"/>
+
+<br/>
+
+![Stars](https://img.shields.io/github/stars/chanu2005-wq/AI_powered_blog?style=flat-square&color=A78BFA&label=stars)
+![Forks](https://img.shields.io/github/forks/chanu2005-wq/AI_powered_blog?style=flat-square&color=22D3EE&label=forks)
+![Issues](https://img.shields.io/github/issues/chanu2005-wq/AI_powered_blog?style=flat-square&color=F59E0B&label=issues)
+![Last commit](https://img.shields.io/github/last-commit/chanu2005-wq/AI_powered_blog?style=flat-square&color=34D399&label=last%20commit)
+
+**WRITE** &nbsp;◆&nbsp; **GENERATE** &nbsp;◆&nbsp; **PUBLISH** &nbsp;◆&nbsp; **ENGAGE**
+
+<br/>
+
+[About](#about) · [Architecture](#architecture) · [Features](#features) · [Tech Stack](#tech-stack) · [Structure](#structure) · [Get Started](#get-started) · [Deployment](#deployment) · [Roadmap](#roadmap)
+
+</div>
