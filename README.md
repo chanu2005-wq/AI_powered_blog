@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="./client/src/assets/quick-blog.svg" alt="Quick Blog — animated low-poly title banner" width="100%" />
+<img src="./client/src/assets/assets/quick-blog.svg" alt="Quick Blog — animated low-poly title banner" width="100%" />
 
 <br/>
 
