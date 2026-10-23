@@ -242,7 +242,6 @@ AI_powered_blog/
 │   ├── public/
 │   ├── src/
 │   │   ├── assets/
-│   │   │   └── quick-blog.svg
 │   │   ├── components/
 │   │   ├── pages/
 │   │   │   ├── Home.jsx
